@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>res/loading.gif</file>
+        <file>res/bg.png</file>
+        <file>res/b0.png</file>
+        <file>res/b1.png</file>
+        <file>res/b2.png</file>
+        <file>res/b3.png</file>
+        <file>res/b4.png</file>
+        <file>res/b5.png</file>
+        <file>res/w0.png</file>
+        <file>res/w1.png</file>
+        <file>res/w2.png</file>
+        <file>res/w3.png</file>
+        <file>res/w4.png</file>
+        <file>res/w5.png</file>
+    </qresource>
+</RCC>

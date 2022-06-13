@@ -1,0 +1,16 @@
+{
+	"load": 1,
+	"type": "LSTM_Att",
+	"output_path": "../model/LSTM_Att",
+	"embedding_len" : 300,
+	"padding_len": 512,
+	"batch_size" : 32,
+	"num_epochs": 0,
+	"lr": 0.0005,
+	"weight_decay": 0,
+	"display_per_batch": 4,
+	"model": {
+		"hidden": 128,
+		"num_layers": 1
+	}
+}

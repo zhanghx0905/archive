@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>注册界面</title>
+</head>
+<body>
+    
+    <form method ="get" action="/get/" >
+        姓名 <input type="text" name="name" value="{{name}}"/><br />
+        邮箱 <input type="text" name="email" value="{{email}}"/><br />
+        出生日期 <input type="date" name="date" value="{{date}}"/><br />
+        性别 <select name="sex" value="{{sex}}">
+            <option value="male">男</option>
+        <option value="female">女</option>
+        </select><br />
+        <input type="submit" value="提交" name="logup"/>
+    </form>
+    {{info}}
+</body>
+</html>

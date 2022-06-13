@@ -1,0 +1,49 @@
+@media (min-width: 1200px) {
+    .container {
+        width: 800px;
+    }
+}
+.article {
+    color: #4D4F53;
+}
+
+.article {
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 32px;
+}
+.img_wrapper img {
+    max-width: 640px;
+    display: block;
+    margin: 0 auto;
+}
+.article p {
+    margin-bottom: 30px;
+}
+article, aside, blockquote, body, button, dd, dl, dt, fieldset, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, input, legend, li, menu, nav, ol, p, pre, section, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.img_descr {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 6px 0;
+    margin: 5px auto;
+    display: inline-block;
+    display: -moz-inline-stack;
+    zoom: 1;
+    text-align: center;
+    font-weight: bold;
+}
+body {
+    font: 12px/20px "Hiragino Sans GB","Microsoft Yahei","Î¢ÈíÑÅºÚ",SimSun,"ËÎÌå",Arial;
+}

@@ -1,0 +1,16 @@
+{
+	"load": 1,
+	"type": "TextRCNN",
+	"output_path": "../model/TextRCNN",
+	"embedding_len" : 300,
+	"padding_len": 512,
+	"batch_size" : 32,
+	"num_epochs": 0,
+	"lr": 0.001,
+	"weight_decay": 0.001,
+	"display_per_batch": 4,
+	"model" : {
+		"hidden": 256,
+		"num_layers": 1
+	}
+}

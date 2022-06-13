@@ -1,0 +1,185 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass[UTF8,12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{xeCJK} %导入中文包
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,
+}
+
+\pagestyle{fancy}
+
+\newenvironment{problem}[2][Problem]
+{ \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2}}
+	{  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+{\textit{Proof:}}
+{}
+\newenvironment{answer}
+{}
+{}
+\newenvironment{eq}
+{
+	\begin{equation}
+		\begin{aligned}\nonumber
+}
+{
+		\end{aligned}
+	\end{equation}
+}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{张鹤潇 2018011365}
+\rhead{多元统计分析} 
+\chead{\textbf{Homework 1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\renewcommand{\qed}{\quad\qedsymbol}
+\begin{problem}{4.4}
+\end{problem}
+\begin{answer}
+(1).$X\sim N_3(\mu, \Sigma)$, $\mu = (2, -3, 1)^T, \Sigma = 
+\begin{bmatrix}
+    1 & 1 & 1 \\
+    1 & 3 & 2 \\
+    1 & 2 & 2
+    \end{bmatrix}
+$.\\
+记 $b=(3,-2,1)^T$, $b^TX\sim N(b^T\mu, b^T\Sigma b)$, \\
+因$b^T\mu=13,b^T\Sigma b=9$, 故 $b^T X\sim N(13,3^2)$.\\
+(2).令 $a=(a_1, a_2)^T$, $X_2$ 与 $Y=X_2 - a^T
+\begin{bmatrix}
+    X_1 \\
+    X_3 
+\end{bmatrix}
+$ 独立当且仅当 $Cov(X, Y)=0$.\\
+\begin{eq}
+	Cov(X, Y)&= Var X_2 - a_1 Cov(X_2,X_1) -a_2Cov(X_2, X_3)\\
+	&= 3 - a_1 -2 a_2
+\end{eq}
+所以可取 $a = (1,1)$.
+\end{answer}
+
+\begin{problem}{4.13}
+\end{problem}
+\begin{answer}
+	(a).对$\Sigma$分块，
+	$\Sigma=\begin{bmatrix}
+		I &  0\\
+		-\Sigma_{22}^{-1}\Sigma_{21}& I
+	\end{bmatrix}
+	$,有$
+	\det\begin{bmatrix}
+		I & -\Sigma_{12}\Sigma_{22}^{-1} \\
+		0 & I
+	\end{bmatrix}=\det\begin{bmatrix}
+		I &  0\\
+		-\Sigma_{22}^{-1}\Sigma_{21}& I
+	\end{bmatrix}=1$
+		\begin{eq}
+			\begin{bmatrix}
+				I & -\Sigma_{12}\Sigma_{22}^{-1} \\
+			    0 & I
+			\end{bmatrix}
+			\begin{bmatrix}
+				\Sigma_{11} & \Sigma_{12} \\
+				\Sigma_{21} & \Sigma_{22}
+			\end{bmatrix}
+			\begin{bmatrix}
+				I &  0\\
+			    -\Sigma_{22}^{-1}\Sigma_{21}& I
+			\end{bmatrix} &= \begin{bmatrix}
+				\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21} &  0\\
+			    0 & \Sigma_{22}
+			\end{bmatrix}
+		\end{eq}
+		两边取行列式，得$|\Sigma|=|\Sigma_{22}|
+		|\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}|$.\\
+	(b).由(a),
+	\begin{eq}
+		\Sigma^{-1} &=  \begin{bmatrix}
+			I &  0\\
+			-\Sigma_{22}^{-1}\Sigma_{21}& I
+		\end{bmatrix}
+		\begin{bmatrix}
+			(\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21})^{-1} &  0\\
+			0 & \Sigma_{22}^{-1}
+		\end{bmatrix}
+		\begin{bmatrix}
+			I & -\Sigma_{12}\Sigma_{22}^{-1} \\
+			0 & I
+		\end{bmatrix}\\
+		(x-\mu)^T\Sigma^{-1}(x-\mu) 
+		&= \begin{bmatrix}
+			x_1-\mu_1-\Sigma_{12}\Sigma_{22}^{-1}(x_2-\mu_2) \\
+			x_2 - \mu_2
+		\end{bmatrix}^T
+		\begin{bmatrix}
+			(\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21})^{-1} &  0\\
+			0 & \Sigma_{22}^{-1}
+		\end{bmatrix}\\
+		&\ \begin{bmatrix}
+			x_1-\mu_1-\Sigma_{12}\Sigma_{22}^{-1}(x_2-\mu_2) \\
+			x_2 - \mu_2
+		\end{bmatrix}\\
+		&=(x_1-\mu_1-\Sigma_{12}\Sigma_{22}^{-1}(x_2-\mu_2))^T 
+		(\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21})^{-1}\\
+		&\ (x_1-\mu_1-\Sigma_{12}\Sigma_{22}^{-1}(x_2-\mu_2))
+		+ (x_2 - \mu_2)^T\Sigma_{22}^{-1} (x_2 - \mu_2)
+	\end{eq}
+	(c).由(a)(b)，$X_2\sim N(\mu_2,\Sigma_{22}),
+	X_1|X_2 \sim N(\mu_1 +\Sigma_{12}\Sigma_{22}^{-1}(x_2-\mu_2), 
+	\Sigma_{11}-\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21})$
+\end{answer}
+
+\begin{problem}{4.16}
+\end{problem}
+\begin{answer}
+	\begin{eq}
+		\sum_{j=1}^n (x_j-\bar{x})(\bar{x}-\mu)^T
+		&= \sum_{j=1}^n (x_j-n\bar{x})](\bar{x}-\mu)^T\\
+		&= (n\bar{x}-n\bar{x})(\bar{x}-\mu)^T\\
+		&= 0_{p\times p}
+	\end{eq}
+	同理，$\sum_{j=1}^n (\bar{x}-\mu)(x_j-\bar{x})^T = 0_{p\times p}$.
+\end{answer}
+
+\begin{problem}{P25}
+\end{problem}
+\begin{answer}
+	\begin{eq}
+		L(\mu,\Sigma) &=
+		\frac{1}{(2\pi)^{np/2}|\Sigma|^{n/2}}exp[-\frac{\sum_{j=1}^{n} 
+		(x_j-\mu)^T \Sigma^{-1} (x_j-\mu)}{2}]\\
+		l(\mu,\Sigma)&=-\frac{np}{2}\ln{2\pi} - \frac{n}{2}\ln{|\Sigma|}
+		-\frac{\sum_{j=1}^{n} (x_j-\mu)^T \Sigma^{-1} (x_j-\mu)}{2}\\
+		\nabla_\mu l &= \frac{1}{2} \sum_{j=1}^n \{\Sigma^{-1}(x_j-\mu)+
+		[(x_j-\mu)^T \Sigma^{-1}]^T\}\\
+		&= \Sigma^{-1} (\sum_{j=1}^n x_j - n\mu)\\
+		\nabla_\Sigma l&= \frac{n\Sigma^{-1}}{2} - 
+		\frac{1}{2}\sum_{j=1}^n x_j \nabla_\Sigma tr[(x_j-\mu)^T \Sigma^{-1} (x_j-\mu)]\\
+		&= \frac{n\Sigma^{-1}}{2}- 
+		\frac{1}{2}\sum_{j=1}^n x_j \nabla_\Sigma tr[ \Sigma^{-1} (x_j-\mu) (x_j-\mu)^T]\\
+		&= \frac{\Sigma^{-1}}{2}[\sum_{j=1}^n (x_j-\mu)(x_j-\mu)^T\Sigma^{-1} - n]\\
+		&= \frac{n\Sigma^{-1}}{2}[\frac{1}{n}\sum_{j=1}^n (x_j-\mu)(x_j-\mu)^T -\Sigma]\Sigma^{-1}
+	\end{eq}
+	故$\mu_{mle}=\bar{x},\Sigma_{mle}= \frac{1}{n}\sum_{j=1}^n (x_j-\bar{x})(x_j-\bar{x})^T$.
+\end{answer}
+\end{document}

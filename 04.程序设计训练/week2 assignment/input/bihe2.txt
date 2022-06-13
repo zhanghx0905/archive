@@ -1,0 +1,14 @@
+white
+king 1 b2
+queen 0
+rook 0
+knight 0
+bishop 0
+pawn 0
+black
+king 1 c7
+queen 1 c3
+rook 0
+knight 0
+bishop 0
+pawn 5 a7 b7 f6 g7 h7

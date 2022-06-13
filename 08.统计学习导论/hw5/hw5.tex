@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass[UTF8,12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{xeCJK} %导入中文包
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,
+}
+\linespread{1.5}
+\pagestyle{fancy}
+
+\newenvironment{problem}[2][Problem]
+{ \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2}}
+	{  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+{\textit{Proof:}}
+{}
+\newenvironment{answer}
+{}
+{}
+\newenvironment{eq}
+{
+	\begin{equation}
+		\begin{aligned}\nonumber
+}
+{
+		\end{aligned}
+	\end{equation}
+}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{张鹤潇 2018011365}
+\rhead{Statistical Learning} 
+\chead{\textbf{Homework 5}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\renewcommand{\qed}{\quad\qedsymbol}
+\begin{problem}{1}
+\end{problem}
+\begin{answer}
+	Since $\epsilon \sim N(0,\sigma^2)$, $y|x,\beta \sim N(x^T\beta,\sigma^2)$,
+	\begin{eq}
+	L&=\prod_{i=1}^{n} P(y_i|x_i,\beta)\\
+	&= \frac{1}{(\sqrt{2\pi}\sigma)^n}\exp{(-\sum_{i=1}^n \frac{(y-x^T\beta)^2}{2\sigma^2})}\\
+	\log{L}&=-\sum_{i=1}^n \frac{(y-x^T\beta)^2}{2\sigma^2}-n\log{(\sqrt{2\pi}\sigma)}\\
+	AIC &= -2\log{L}+2d\\
+	&= \frac{RSS}{\sigma^2} + 2d + 2n\log{(\sqrt{2\pi}\sigma)}
+\end{eq}
+	Noticed that $2n\log{(\sqrt{2\pi}\sigma)}$ is constant for certain data, we conclude 
+	$AIC=\dfrac{RSS}{\sigma^2}+2d$.
+\end{answer}
+
+\begin{problem}{2}
+\end{problem}
+\begin{answer}
+	There are two main problems in this approach.\\
+	(1).There were too many garbage features in the model. For example,
+	for MI, they had over 24,000 features, most of which had nothing to do with the output. 
+	As a result, the model's resources were wasted and performance suffered.\\
+	(2).The way they labeled data was unreasonable. Y depended on only one predictor.
+	Although after L1-penalized logistic regression there might be more than one active features,
+	the performance of the model would degrade to near single-variable model.
+\end{answer}
+\end{document}

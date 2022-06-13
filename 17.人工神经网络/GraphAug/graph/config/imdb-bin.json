@@ -1,0 +1,6 @@
+{
+    "dataset": "IMDB-BINARY",
+    "layers": 2,
+    "batchsize": 256,
+    "epochs": 20 
+}

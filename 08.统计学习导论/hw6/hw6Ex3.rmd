@@ -1,0 +1,134 @@
+---
+title: "HW6 Ex3"
+author: "Zhang Hexiao"
+date: "2020/4/5"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+rm(list=ls())
+library(dplyr)
+```
+
+## Ex a.
+
+The following function is to generate the data needed.
+
+```{r}
+genData <- function(noise=F){
+  sample.size <- 200
+  
+  # generate data
+  data.mat <- matrix(nrow=sample.size, ncol=4)
+  for (i in 1:sample.size) {
+    samp <- rnorm(4)
+    # conditions on class 2
+    if (i > sample.size/2) {
+      norm.square <- sum(samp^2)
+      while (norm.square > 16 | norm.square < 9){
+        samp <- rnorm(4)
+        norm.square <- sum(samp^2)
+      }
+    }
+    data.mat[i, ] = samp
+  }
+  
+  # generate noise items
+  if (noise) {
+    noise.mat <- matrix(nrow=sample.size, ncol=6)
+    for (i in 1:sample.size) {
+      noise.mat[i, ] <- rnorm(6)
+    }
+    data.mat <- cbind(data.mat, noise.mat)
+  }
+  
+  # generate labels
+  y <- rbind(matrix(1, nrow=sample.size/2), 
+             matrix(2, nrow=sample.size/2)) %>% 
+    as.factor
+  cbind(data.frame(data.mat), y)
+  
+}
+```
+
+Now let's check the generated data.
+
+```{r}
+data.no.noise <- genData()
+data.no.noise %>% head(n=3)
+data.no.noise %>% tail(n=3)
+```
+
+```{r}
+data.noise <- genData(noise=T)
+data.noise %>% head(n=3)
+data.noise %>% tail(n=3)
+```
+
+## Ex b.
+
+```{r}
+library(kernlab)
+svmKFlod <- function(d, C, sigma, K=5) {
+  svm.model <- ksvm(y~., data=d,
+                    type='C-svc',
+                    cross=K,
+                    C=C,
+                    kpar=list(sigma=sigma))
+  svm.model@cross
+}
+```
+
+The idea of optimizing parameters is to tune them one by one.
+
+```{r}
+svmParaTune <- function(d) {
+  par(mfcol=c(1, 2))
+  # Fix C = 1 and tune sigma
+  sigmas <- seq(0.01, 2, 0.01)
+  Errors <- rep(0, length(sigmas))
+  for (i in 1:length(sigmas)){
+    Errors[i] <- svmKFlod(d, C=1, 
+                          sigma=sigmas[i])
+  }
+  
+  plot(sigmas, Errors, type='l', col="blue")
+  abline(h=min(Errors))
+  
+  sigma.selected <- sigmas[which.min(Errors)]
+  
+  # Fix sigma we selected just now and tune C
+  C.arr <- seq(1, 100, 1)
+  Errors <- rep(0, length(C.arr))
+  for (i in 1:length(C.arr)){
+    Errors[i] <- svmKFlod(d, C=C.arr[i], 
+                          sigma=sigma.selected)
+  }
+  
+  plot(C.arr, Errors, type='l', col="blue")
+  abline(h=min(Errors))
+  
+  C.selected <- C.arr[which.min(Errors)]
+  cat("CV error is minimized at", min(Errors),
+      "when C =", C.selected, 
+      'and sigma =', sigma.selected, '\n')
+  
+  # list(C=C.selected, sigma=sigma.selected)
+}
+
+cat('Tune the parameter sigma and C for the data with noise.\n')
+svmParaTune(data.noise)
+
+cat('Tune the parameter sigma and C for the data without noise.\n')
+svmParaTune(data.no.noise)
+```
+
+## Ex c.
+
+The performances of the polynomial kernels showed that SVM is still vulnerable to redundant features andthe curse of dimensionality. The RBF kernel performed as good as the second order polynomial kernel inboth senarios. 
+
+We learned in class that although theoretically the RBF kernel is the inner product of infinitenumber of features, the practical number of features is small. The eigenvalue decomposition of the RBFkernel shows that most features are almost zero, and the L2 penalty sets coefficients to those features to smallvalues, which can prevent the model from using those features and thus overfitting is avoided. The remaining useful features from the RBF kernel turn out to be enough flexible to suit many classification problems.

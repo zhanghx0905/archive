@@ -1,0 +1,72 @@
+---
+title: "Assignment 3 Q 2"
+author: "Zhang HeXiao"
+date: "2020/3/5"
+output:
+  html_document:
+    df_print: paged
+---
+This simple example explains why cross-validation is important in variable selection.
+
+### Data Preparation
+
+The set of data is about the deals of real estate in a certain place,
+and we try to fit a linear model to predict the price of real estate.
+
+Note that the predictor 'ID' actually has nothing to do with the price.
+
+```{r}
+rm(list=ls())
+library(dplyr)
+
+# Data taken from "http://www.stat.cmu.edu/~cshalizi/mreg/15/hw/08/real-estate.csv"
+real.estate <- read.csv("./real-estate.csv")
+head(real.estate)
+```
+
+### Variable Selection without Cross-Validation
+
+The performance of the model seemed to degrade when we just dropped 'ID' without cross-validation.
+
+That's certainly not because 'ID' was predictive, but because our model was overfitting.
+
+```{r}
+# begin with a full model
+lm.all <- lm(Price~., data=real.estate)
+
+# try to remove the insignificant prodictor 'ID'
+lm.no.ID <- lm(Price~.-ID, data=real.estate)
+
+cat("---------- Variable Selection without Cross Validation ----------\n")
+cat("The MSE of the model with 'ID' is", mean(lm.all$residuals^2), "\n")
+cat("The MSE of the model without 'ID' is", mean(lm.no.ID$residuals^2), "\n")
+```
+
+### Variable Selection with Cross-Validation
+
+With K-Fold Cross Validation, we got an ideal result.
+
+```{r}
+# K-Fold CV
+set.seed(20200305)
+K <- 5
+N <- nrow(real.estate)
+train.id <- rep(1:K, length.out=N) %>% sample(N)
+Err.all <- rep(0, K)
+Err.no.ID <- rep(0,K)
+for(k in 1:K){
+  training.set <- real.estate[train.id!=k,]
+  test.set <- real.estate[train.id==k,]
+  
+  lm.all.cv <- lm(Price~., data=training.set)
+  lm.no.ID.cv <- lm(Price~.-ID, data=training.set)
+  Err.all[k] <-  mean((test.set$Price -
+                         predict(lm.all.cv, test.set))^2)
+  Err.no.ID[k] <- mean((test.set$Price -
+                          predict(lm.no.ID.cv, test.set))^2)
+}
+
+cat("---------- Variable Selection with Cross Validation ----------\n")
+cat("The MSE of the model with 'ID' is", mean(Err.all), "\n")
+cat("The MSE of the model without 'ID' is", mean(Err.no.ID), "\n")
+```

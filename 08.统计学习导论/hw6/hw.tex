@@ -1,0 +1,133 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass[UTF8,12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{xeCJK} %导入中文包
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,
+}
+\linespread{1.5}
+\pagestyle{fancy}
+
+\newenvironment{problem}[2][Problem]
+{ \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2}}
+	{  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{Proof}
+{\textit{Proof:}}
+{}
+\newenvironment{answer}
+{%\textit{Answer:}
+}
+{}
+\newenvironment{eq}
+{
+	\begin{equation}
+		\begin{aligned}\nonumber
+}
+{
+		\end{aligned}
+	\end{equation}
+}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{张鹤潇 2018011365}
+\rhead{Statistic Learning} 
+\chead{\textbf{Homework 6}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\renewcommand{\qed}{\quad\qedsymbol}
+\setlength{\parindent}{0pt}
+
+\begin{problem}{1}
+\end{problem}
+\begin{answer}
+	The Lagrangian function and its derivatives
+	for $\beta$, $\beta_0$ and $\xi_i$ are:
+	\begin{eq}
+		L &= \frac{1}{2}||\beta||^2 + C\sum_{i=1}^N \xi_i - \sum_{i=1}^N
+		\alpha_i[y_i(x_i^T\beta + \beta_0)-(1-\xi_i)] - 
+		\sum_{i=1}^N \mu_i\xi_i\\
+		\nabla_\beta &= \beta - \sum_{i=1}^N\alpha_i y_ix_i\\
+		\nabla_{\beta_0} &= -\sum_{i=1}^N \alpha_i  y_i\\
+		\nabla_{\xi_i} &= C- \alpha_i -\mu_i
+	\end{eq}
+	Set the derivatives to $0$, we get $\sum_{i=1}^N \alpha_i y_i=0,\ 
+	\beta= \sum_{i=1}^N\alpha_i y_ix_i,\ \alpha_i = C-\mu_i$.
+\begin{eq}
+	L_D &= \frac{1}{2}\beta^T\beta + C\sum_{i=1}^N \xi_i -\beta^T\beta +
+	\sum_{i=1}^N[\alpha_i(1-\xi_i)-\mu_i\xi_i]\\
+	&= \sum_{i=1}^N \alpha_i - \frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N 
+	\alpha_i\alpha_j y_i y_j x_i^T x_j
+\end{eq}
+	The dual problem is $\max\limits_{\alpha}L_D, s.t.\ 
+	0\le \alpha_i\le C,\ \sum_{i=1}^N \alpha_iy_i=0$.\\
+	Then we can get $\hat{\alpha}_i$ by optimizing the dual problem. The solution 
+	for the primal problem is:
+	\begin{eq}
+		\hat{\beta} = \sum_{i=1}^N \hat{\alpha}_i y_i x_i,\ 
+		\hat{\beta}_0 = y_{i^*}-x_{i^*}\hat{\beta}
+	\end{eq}
+	where $i^*$ is a margin point($\hat{\alpha}_{i^*}>0, \hat{\xi_{i^*}}=0$).
+\end{answer}
+
+\begin{problem}{2}
+\end{problem}
+\begin{answer}
+	Let $f(\beta,\beta_0)=\sum_{i=1}^n (y-\beta_0-x^T\beta)^2,
+	\ g(\beta)=\sum_{i=1}^p|\beta_j|-s$.
+	
+	The primal problem is $\min\limits_{\beta_0,\beta}f(\beta,\beta_0),
+	\ s.t.\ g(\beta)\le 0$ and the dual problem is $\max\limits_{\lambda}
+	\theta(\lambda),\lambda\ge 0$,
+
+	where $\theta(\lambda)=\inf\limits_{\beta_0,\beta}
+	{\{f(\beta,\beta_0)+\lambda g(\beta)\}}$.
+
+	Noted that $f$ and $g$ satisfy the condition of the strong dual theorem, 
+	if $\bar{\beta}, \bar{\beta_0}$ is a feasible solution of the primal problem, then there
+	exists some $\bar{\lambda}$, s.t.
+	\begin{eq}
+		f(\bar{\beta},\bar{\beta_0})&=\theta(\bar{\lambda})=\sup{\{\theta(\lambda),
+		\lambda\ge 0\}}\\
+		\bar{\lambda}g(\bar{\beta})&=0
+	\end{eq}
+	So $f(\bar{\beta},\bar{\beta_0})+\bar{\lambda} g(\bar{\beta})
+	=f(\bar{\beta},\bar{\beta_0})
+	=\theta(\bar{\lambda})$. In other words, $\beta_0,\beta$ is also a feasible solution
+	of $\min\limits_{\beta_0,\beta}{f(\beta,\beta_0)+\lambda g(\beta)}$.
+
+	Further more,
+	$$
+	\mathop{argmin}\limits_{\beta_0,\beta} f(\beta,\beta_0)+\lambda g(\beta)
+	= \mathop{argmin}\limits_{\beta_0,\beta} \sum_{i=1}^n (y-\beta_0-x^T\beta)^2
+	+\lambda\sum_{i=1}^p|\beta_j|
+	$$	
+	So the promal problem is equivalent to $$\min\limits_{\beta_0,\beta}
+	\sum_{i=1}^n (y-\beta_0-x^T\beta)^2
+	+\lambda\sum_{i=1}^p|\beta_j|$$ for some $\lambda > 0$.
+\end{answer}
+
+\begin{problem}{3}
+\end{problem}
+\begin{answer}
+	Please see \href{hw6Ex3.rmd}{attachment}.
+\end{answer}
+\end{document}

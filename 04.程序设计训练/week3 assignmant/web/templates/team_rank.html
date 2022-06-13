@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <title>NBA球队热度排行</title>
+    <link rel="shortcut icon" type="image/png" href="/static/logo.ico"/>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
+    <link href="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/team_rank.css">
+</head>
+
+<body>
+    {% include 'header.html' %}
+<h2 style="text-align: center">NBA球队热度排行榜</h2>
+<table class="bordered" style="margin: auto;width: 600px;">
+    <thead>
+
+    <tr>
+        <th>球队</th>
+        <th>热度</th>
+    </tr>
+    </thead>
+    {% for team in ans %}
+    <tr>
+        <td class="name">{{ team.name }}</td>        
+        <td>{{ team.cnt }}</td>
+    </tr>        
+    {% endfor %}
+</table>
+
+<br><br>
+    {% include 'footer.html' %}
+    <script>
+       $(document).ready(function () {
+    var arr = $(".name");
+    for (var x in arr) {
+        var s = arr[x].innerHTML;
+        arr[x].innerHTML = "<a href=\'/team?name=" + s + "\'>" + s + "</a>";
+    }
+}
+)
+    </script>
+</body>
+</html>

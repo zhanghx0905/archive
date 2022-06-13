@@ -1,0 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass[UTF8,12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{xeCJK} %导入中文包
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,
+}
+
+\pagestyle{fancy}
+
+\newenvironment{problem}[2][Problem]
+{ \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2}}
+	{  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+{\textit{Proof:}}
+{}
+\newenvironment{answer}
+{}%\textit{Answer:}\\}
+{}
+\newenvironment{eq}
+{
+	\begin{equation}
+		\begin{aligned}
+}
+{
+		\end{aligned}
+	\end{equation}
+}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{张鹤潇 2018011365}
+\rhead{Statistical Learning} 
+\chead{\textbf{Homework 1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\renewcommand{\qed}{\quad\qedsymbol}
+%\renewcommand{\bs}{\}
+\begin{problem}{1}
+\end{problem}
+\begin{answer}
+	For OLS,
+	\begin{eq}\nonumber
+		\mathop{argmin}\limits_{\beta}\sum_{i=1}^n (y_i-f(x_i))^2
+		&= \mathop{argmin}\limits_{\beta}(y-X\beta)^T(y-X\beta)\\
+		\nabla_{\beta}(y-X\beta)^T(y-X\beta)
+		&=  \nabla_{\beta} (y^Ty+\beta^T X^T X \beta
+		-\beta^T X^T y - y^T X\beta)\\
+		&= 2 (X^T X \beta- X^T y)
+	\end{eq}
+	Let $\nabla_{\beta}(y-X\beta)^T(y-X\beta) =0$,
+	we get $\hat{\beta}=(X^T X)^{-1}X^T y$.
+\end{answer}
+
+\begin{problem}{2}
+\end{problem}
+\begin{answer}
+	Since $y=X\beta+\epsilon$,\\
+	\begin{eq}\nonumber
+		Cov({\hat{\beta}})
+		&=Cov[(X^T X)^{-1}X^T y]\\
+		&=Cov[\beta + (X^T X)^{-1}X^T\epsilon]\\
+		&=(X^T X)^{-1}X^T Cov(y) X (X^T X)^{-1}\\
+		&= (X^T X)^{-1} \sigma^2
+	\end{eq}
+\end{answer}
+
+\begin{problem}{3}
+\end{problem}
+\begin{answer}
+	\begin{eq}
+		SS_{tot} &= \sum_{i=1}^n (y_i-\bar{y})^2
+		&= y^T y-n\bar{y}^2
+	\end{eq}
+	Since $E(y-\hat{y})=E(y-X\beta)=E(\epsilon)=0$,$\sum_{i=1}^n y_i=\sum_{i=1}^n \hat{y_i}$.
+	\begin{eq}
+		SS_{reg} &= \sum_{i=1}^n (\hat{y_i}-\bar{y})^2\\
+		&= \hat{y}^T \hat{y} + n\bar{y}^2 - 2\bar{y}\sum_{i=1}^n \hat{y_i}\\
+		&= \hat{y}^T \hat{y} - n\bar{y}^2
+	\end{eq}
+	Notice that  $\hat{y}^T(y-\hat{y})
+		=\beta^T X^T [y-X(X^T X)^{-1}X^T y] = 0 $.
+	\begin{eq}
+		SS_{res} &= \sum_{i=1}^n (y_i-\hat{y})^2\\
+		&= y^T y - \hat{y}^T \hat{y} +\hat{y}^T(y-\hat{y})\\
+		&= y^T y - \hat{y}^T \hat{y}
+	\end{eq}
+	Form (1), (2) and (3), we get $SS_{tot}=SS_{reg}+SS{res}$.
+\end{answer}
+
+\begin{problem}{4}
+\end{problem}
+\begin{answer}
+	(1).
+	Assume that $\epsilon$ and $f(x^*)-\hat{f}(x^*)$ are independent.
+	\begin{eq}\nonumber
+		E[Y-\hat{f}(x^*)]^2 &= E[f(x^*)-\hat{f}(x^*)+\epsilon]^2\\
+		&= E[f(x^*)-\hat{f}(x^*)]^2 + E(\epsilon^2) + 2E(\epsilon)E[f(x^*)-\hat{f}(x^*)]\\
+		&= E[f(x^*)-\hat{f}(x^*)]^2 + E(\epsilon^2)
+	\end{eq}
+	Since $E(\epsilon^2)$ is constant, minimizing $E[Y-\hat{f}(x^*)]^2$ is equivalent to
+	minimizing $E[f(x^*)-\hat{f}(x^*)]^2$.\\
+	We take the expectation with regard to r.m. $x^*$.\\
+	(2).
+	\begin{eq}\nonumber
+		E[f(x^*)-\hat{f}(x^*)]^2
+		&= E[f(x^*)-E(\hat{f}(x^*))+E(\hat{f}(x^*))-\hat{f}(x^*)]^2\\
+		&= (f(x^*)-E\hat{f}(x^*))^2 + E[E(\hat{f}(x^*))-\hat{f}(x^*)]^2\\
+		&\quad + 2[f(x^*)-E(\hat{f}(x^*))]E[E(\hat{f}(x^*))-\hat{f}(x^*)]\\
+		&= (f(x^*)-E\hat{f}(x^*))^2 + Var[\hat{f}(x^*)]^2
+	\end{eq}
+\end{answer}
+\end{document}

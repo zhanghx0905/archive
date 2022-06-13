@@ -1,0 +1,6 @@
+white
+king 1 e1
+rook 2 a1 h1
+black
+king 1 e8
+rook 2 a8 h8

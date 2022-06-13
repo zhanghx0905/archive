@@ -1,0 +1,15 @@
+{
+	"load": 1,
+	"type": "MLP",
+	"output_path": "../model/MLP",
+	"embedding_len" : 300,
+	"padding_len": 512,
+	"batch_size" : 256,
+	"num_epochs": 0,
+	"lr": 0.001,
+    	"weight_decay": 0,
+	"display_per_batch": 1,
+	"model" : {
+		"hidden_unit": 512
+	}
+}

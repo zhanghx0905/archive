@@ -1,0 +1,23 @@
+@media (min-width: 1200px) {
+    #search_edit {
+        width: 550px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    #search_edit {
+        width: 450px
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #search_edit {
+        width: 350px
+    }
+}
+
+@media (max-width: 767px) {
+    #search_edit {
+        width: 100%;
+    }
+}

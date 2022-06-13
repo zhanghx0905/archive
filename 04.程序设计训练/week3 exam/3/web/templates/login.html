@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>登陆成功</title>
+</head>
+<body>
+    <table>
+        <thead> 
+        <tr>
+            <th>姓名</th>
+            <th>  性别</th>
+            <th> 出生日期</th>
+            <th>邮箱</th>
+        </tr>
+        </thead>
+        
+        {% for i in data%}
+        <tr>
+            <td> {{i.name}}</td>
+            <td> {{i.sex}}</td>
+            <td>{{ i.date}}</td>
+            <td>{{ i.email}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+
+</body>
+</html>

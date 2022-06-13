@@ -1,0 +1,135 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass[UTF8,12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{xeCJK} %导入中文包
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,
+}
+\linespread{1.5}
+\pagestyle{fancy}
+
+\newenvironment{problem}[2][Problem]
+{ \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2}}
+	{  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+{\textit{Proof:}}
+{}
+\newenvironment{answer}
+{}
+{}
+\newenvironment{eq}
+{
+	\begin{equation}
+		\begin{aligned}\nonumber
+}
+{
+		\end{aligned}
+	\end{equation}
+}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{张鹤潇 2018011365}
+\rhead{多元统计分析} 
+\chead{\textbf{Homework 2}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\renewcommand{\qed}{\quad\qedsymbol}
+\begin{problem}{4.18}
+\end{problem}
+\begin{answer}
+	$$
+	\mu_{mle}=\bar{X}=(4,6)^T, \Sigma_{mle}=
+	\frac{1}{4}\sum_{i=1}^4 (X-\bar{X})(X-\bar{X})^T=
+	\begin{bmatrix}
+		0.5 & 0.25\\
+		0.25 & 1.5
+	\end{bmatrix}
+	$$
+\end{answer}
+
+\begin{problem}{4.19}
+\end{problem}
+\begin{answer}
+	(a).$(X_1-\mu)^T\Sigma^{-1}(X_1-\mu)\sim \chi^2_6$.\\
+	(b).$\bar{X}\sim N_6(\mu, \frac{1}{20}\Sigma), 
+	\sqrt{n}(\bar{X}-\mu)\sim N_6(0,\Sigma)$.\\
+	(c).$(n-1)S \sim W_6(19,\Sigma)$
+\end{answer}
+\begin{problem}{4.20(b)}
+\end{problem}
+\begin{answer}
+	$$
+	B =\begin{bmatrix}
+		1 & 0 & 0 & 0 & 0 & 0\\
+		0 & 0 & 1 & 0 & 0 & 0
+	\end{bmatrix}
+	,B(19S)B^T=19\begin{bmatrix}
+		s_{11} & s_{13}\\
+		s_{31} & s_{33}
+	\end{bmatrix}
+	$$
+	记$\Sigma_{13}=\begin{bmatrix}
+		\sigma_{11} & \sigma_{13}\\
+		\sigma_{31} & \sigma_{33}
+	\end{bmatrix}
+	$,则$B(19S)B^T \sim W_2(19,\Sigma_{13})$.
+\end{answer}
+
+\begin{problem}{5.1}
+\end{problem}
+\begin{answer}
+	(a).
+	$$
+	\bar{X}=(6,10)^T, s=\begin{bmatrix}
+		8 & -10/3\\
+		-10/3 & 2
+	\end{bmatrix}
+	$$
+	$$
+	T^2 = 4(\bar{X}-\mu)^T s^{-1}(\bar{X}-\mu)=13.6
+	$$
+	(b).$T^2\sim \frac{2(4-1)}{4-2}F_{2,4-2}=3F_{2,2}$\\
+	(c).$3F_{2,2}(0.05)=57>T^2$, 无法拒绝$H_0$.
+\end{answer}
+
+\begin{problem}{5.2}
+\end{problem}
+\begin{answer}
+$$
+Y=XC^T = \begin{bmatrix}
+	-10 & 14\\
+	-1 & 17\\
+	-3 & 15\\
+	-2 & 18
+\end{bmatrix},\mu_Y=C\mu=(-4,16)^T
+$$
+计算可得$T^2=4(\bar{Y}-\mu_Y)S_Y^{-1}(\bar{Y}-\mu_Y)^T=13.6$，
+保持不变。
+\end{answer}
+
+\begin{problem}{5.5}
+\end{problem}
+	$T^2=42(\bar{X}-\mu)S^{-1}(\bar{X}-\mu)^T=1.17 
+	$\\
+	而$\frac{n(n-1)}{n-p}=2.05,
+	2.05F_{p,n-p}(\alpha)=2.05F_{2,40}(0.05)=6.62>T^2$.\\
+	无法拒绝$H_0$.\ 而由图5.1，可知$\mu$处于椭圆内部，也即$\mu$在置信域内。
+\end{document}

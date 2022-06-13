@@ -1,0 +1,55 @@
+---
+title: "hw4"
+author: "Zhang Hexiao"
+date: "2020/4/5"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 8.1
+
+```{r}
+rm(list=ls())
+sigma <- matrix(c(5, 2,
+                  2, 2), nrow=2)
+eigen(sigma)
+```
+
+## 8.2
+
+```{r}
+rm(list=ls())
+rho <- matrix(c(1, sqrt(2/5),
+                sqrt(2/5), 1), nrow=2)
+eigen(rho)
+# cal cov(y_i, x_j)
+getCov <- function(mat, i, j){
+  eig.values <- eigen(mat)$values
+  eig.vec <- eigen(mat)$vectors
+  sqrt(eig.values[i])*eig.vec[j, i]
+}
+getCov(rho, 1, 1)
+getCov(rho, 1, 2)
+getCov(rho, 2, 1)
+```
+
+## 8.14
+
+```{r}
+rm(list=ls())
+
+data <- read.table('T5-1.DAT')
+names(data) <- c("Sweat_Rate", "Sodium", "Potassium")
+data.pca <- prcomp(data)
+
+eigenvalues <- data.pca$sdev^2
+eigenvalues[1]/sum(eigenvalues)
+
+pc1 <- data.pca$x[, 1]
+qqnorm(pc1, main='PC1')
+qqline(pc1)
+```
+

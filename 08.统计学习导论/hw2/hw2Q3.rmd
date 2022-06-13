@@ -1,0 +1,89 @@
+---
+title: "Homework 2 Problem 3"
+author: "张鹤潇"
+date: "2020/2/27"
+output:
+  pdf_document: default
+  html_document: default
+---
+## Data Preprocessing
+
+Read in the data and preprocess it.
+
+```{r}
+# dplyr is required for operator %>% and func select
+library(dplyr)
+load("./prostate.RData")
+
+# Normalize X
+X <- prostate %>%
+  select(lcavol:pgg45) %>%
+  data.matrix %>% 
+  scale
+
+# Centralize y
+y.raw <- prostate$lpsa %>% 
+  data.matrix
+intercept <- mean(y.raw)
+y <- y.raw - intercept
+```
+
+## Ridge regression and K-Fold validation
+
+The main implementation of the algorithm.
+
+```{r} 
+# Return the ridge regression's parameter beta
+ridgeReg <- function(X, y, lambda) {
+  solve(lambda * diag(ncol(X)) + t(X) %*% X, t(X) %*% y)
+}
+
+# Return E(Y-f(x))^2 of a linear model
+lmMSE <- function(X, y, beta){
+  mean((y - X %*% beta)^2)
+}
+
+ridgeKFlod <- function(X, y, lambda, K=5, seed=20200227) {
+  # Set the random number seed for reproducing
+  set.seed(seed) 
+
+  # Sample for K-Fold validation
+  N <- nrow(X)
+  train.id <- rep(1:K, length.out=N) %>% sample(N)
+  Err <- rep(0, K)
+  for(k in 1:K){
+    # Train the model on the training set,
+    # calculate E(Y-f(x))^2 on the validation set
+    beta <- ridgeReg(X[train.id!=k, ], y[train.id!=k], lambda)
+    Err[k] <- lmMSE(X[train.id==k, ], y[train.id==k], beta)
+  }
+  # return MSE 
+  mean(Err)
+}
+```
+## Parameter selection
+
+Parameter is selected according to the results of k-fold validation.
+
+Note that the setting of random number seed has a significant impact on the results, 
+probably because the data volume is too small.
+
+```{r}
+lambdas <- seq(0, 15, by=0.01)
+MSEs <- rep(0, length(lambdas))
+for (i in 1:length(lambdas)){
+  MSEs[i] <- ridgeKFlod(X, y, lambdas[i])
+}
+plot(lambdas, MSEs, type='l', col="blue")
+abline(h=min(MSEs))
+
+lambda.selected <- lambdas[which.min(MSEs)]
+cat("MSE is minimized at", min(MSEs),
+    "when lambda =", lambda.selected)
+```
+## Output
+
+```{r}
+beta <- rbind(intercept,ridgeReg(X, y, lambda.selected))
+print(beta)
+```

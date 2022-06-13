@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>国际象棋对战平台</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="actionInit"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>对战</string>
+    </property>
+    <addaction name="actionServer"/>
+    <addaction name="actionClient"/>
+    <addaction name="separator"/>
+    <addaction name="actionAD"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>打开残局</string>
+   </property>
+   <property name="toolTip">
+    <string>打开残局</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>退出</string>
+   </property>
+   <property name="toolTip">
+    <string>退出</string>
+   </property>
+  </action>
+  <action name="actionInit">
+   <property name="text">
+    <string>初始局面</string>
+   </property>
+   <property name="toolTip">
+    <string>初始化棋局</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>保存残局</string>
+   </property>
+  </action>
+  <action name="actionClient">
+   <property name="text">
+    <string>连接服务器</string>
+   </property>
+   <property name="toolTip">
+    <string>连接服务器</string>
+   </property>
+  </action>
+  <action name="actionServer">
+   <property name="text">
+    <string>建立服务器</string>
+   </property>
+   <property name="toolTip">
+    <string>建立服务器</string>
+   </property>
+  </action>
+  <action name="actionAD">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>认输</string>
+   </property>
+   <property name="toolTip">
+    <string>认输</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

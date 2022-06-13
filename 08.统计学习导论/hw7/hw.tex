@@ -1,0 +1,179 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass[UTF8,12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{xeCJK} %导入中文包
+\usepackage[linesnumbered, boxed, ruled, commentsnumbered, noend]{algorithm2e}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,
+}
+\linespread{1.5}
+\pagestyle{fancy}
+
+\newenvironment{problem}[2][Problem]
+{ \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2}}
+	{  \end{mdframed}}
+
+\newenvironment{myalgo}{
+  \IncMargin{1em} % 使得行号不向外突出 
+  \begin{algorithm}
+      \SetAlgoLined
+      \SetKwProg{Fn}{Function}{:}{}
+      \BlankLine
+      \SetKwInOut{Input}{\textbf{输入}}\SetKwInOut{Output}{\textbf{输出}} % 替换关键词
+}{
+  \end{algorithm}
+  \DecMargin{1em}
+}
+% Define solution environment
+\newenvironment{Proof}
+{\textit{Proof:}}
+{}
+\newenvironment{answer}
+{%\textit{Answer:}
+}
+{}
+\newenvironment{eq}
+{
+	\begin{equation}
+		\begin{aligned}\nonumber
+}
+{
+		\end{aligned}
+	\end{equation}
+}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{张鹤潇 2018011365}
+\rhead{Statistical Learning} 
+\chead{\textbf{Homework 7}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\lstset{escapeinside=``, breaklines=true, backgroundcolor=\color{lightgray!40!white}, frame=none,extendedchars=false, keywordstyle=\color{blue!70}\bfseries, basicstyle=\ttfamily,
+commentstyle=\ttfamily\color{green!40!black}, showstringspaces=false,
+basicstyle=\footnotesize}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+%\setlength{\parindent}{0pt}
+
+\begin{problem}{1}
+\end{problem}
+\begin{answer}
+	\noindent Team Members: 徐光正 2016012856, 郭峥岩2018011340, 张鹤潇 2018011365
+
+	\noindent Problem: Chinese Emotion Classification
+
+	\noindent Data sources: NLPCC 2014 Evaluation Tasks, \href{http://tcci.ccf.org.cn/conference/2014/dldoc/evtestdata1.zip}{Emotion Analysis in Chinese Weibo Texts} 
+	
+	\noindent\textbf{Introduction:}
+	
+	Emotion Classification is a basic problem in the NLP field, 
+	where a lot of previous work can be used for reference.
+	The data set we use is an open-source corpus from Sina Weibo, where the texts are divided into 
+	two categories according to whether or not opinionated. There are about 15,000 positive samples 
+	and 30,000 negative samples in the training set.
+	
+	We team want to compare the performance of different methods 
+	from traditional machine learning models such as Naive Bayes, 
+	to deep learning models using CNN, RNN or even GNN, then to state-of-the-art pre-trained models. 
+	We hope to deepen our understanding of relevant methods by 
+	analyzing the advantages and disadvantages of them and try to make some improvements.
+	
+\end{answer}
+\begin{problem}{2}
+\end{problem}
+\begin{answer}
+	The pseudocode for the regression tree is as follows (in python syntax):
+	\begin{lstlisting}[language=python]
+class Node:
+    def __init__(self, value=None):
+        self.lchild = None
+        self.rchild = None
+        self.cut_feature = None
+        self.cut_point = None
+        self.value = value
+
+    def split(self, samples, labels):
+        ''' samples: sample_size * feature_num
+            labels : feature_num '''
+        def do_split(self, col, labels, cut_point):
+            '''col: the selected feature of training data'''
+            labels_l = labels[col < cut_point]
+            labels_r = labels[col >= cut_point]
+
+            avg_l = mean(labels_l)
+            avg_r = mean(labels_r)
+			mse = (sum((labels_l - avg_l)**2) + 
+				sum((labels_r - avg_r)**2)) / len(labels)
+            return avg_l, avg_r, mse
+
+        min_loss = INF
+        avg_l, avg_r = None, None
+        for feature in features: 
+            for cut_point in cut_points:
+				avg_l_tmp, avg_r_tmp, loss = 
+					do_split(samples[:, ], labels, cut_point)
+                if min_loss > loss:
+                    min_loss = loss
+                    avg_l, avg_r = avg_l_tmp, avg_r_tmp
+                    self.cut_feature = feature
+                    self.cut_point = cut_point
+        self.lchild = Node(avg_l)
+		self.rchild = Node(avg_r)
+
+class Tree:
+    def __init__(self, X, y):
+        self.root = Node()
+        # BFS
+        node_queue = queue.Queue()
+        node_queue.put((self.root, X, y))
+        while not node_queue.empty():
+            node, samples, labels = node_queue.get()
+
+            # terminal condition can be the max height of the tree
+            # or the min samples needed to split a node
+            if "terminal conditions are satisfied":
+                break
+
+            node.split(samples, labels)
+            # Pick the samples that belong to the two subregions
+            idx_l = (samples[:, node.cut_feature] < node.cut_point)
+            idx_r = (samples[:, node.cut_feature] >= node.cut_point)
+
+            node_queue.put((node.lchild, samples[idx_l, :], labels[idx_l]))
+            node_queue.put((node.rchild, samples[idx_r, :], labels[idx_r]))
+
+    def predict(self, X):
+        def predict_one(sample):
+            node = self.root
+            while node.lchild and node.rchild:
+                if sample[node.cut_feature] < node.cut_point:
+                    node = node.lchild
+                else:
+                    node = node.rchild
+            return node.value
+        return [predict_one(sample) for sample in X]
+	\end{lstlisting}
+
+\end{answer}
+\end{document}

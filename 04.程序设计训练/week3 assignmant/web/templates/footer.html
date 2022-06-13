@@ -1,0 +1,13 @@
+﻿<link rel="stylesheet" type="text/css" href="/static/css/footer.css">
+<div class="footer"><a href="/team_rank">球队热度排名</a> </div>
+
+<script>
+$(document).ready(function(){
+    $.ajax({
+        url: "{% url 'ajax_total' %}",
+        success: function(ret) {
+            $('.footer').append(" 总共收录" + ret['total'] + "条新闻");
+        }
+    });
+});
+</script>

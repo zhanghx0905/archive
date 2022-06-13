@@ -1,0 +1,6 @@
+{
+    "dataset": "PTC_MR",
+    "layers": 4,
+    "batchsize": 32,
+    "epochs": 100
+}

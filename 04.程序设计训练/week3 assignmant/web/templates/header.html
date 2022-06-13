@@ -1,0 +1,12 @@
+﻿<link rel="stylesheet" type="text/css" href="/static/css/header.css">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <form id='search-form' class="navbar-form navbar-left" role="search" action="{% url 'search' %}" method="get">
+            <div class="form-group">
+                <input type="text" name="kw" class="form-control" id="search_edit" autocomplete="off">
+            </div>
+            <button class="btn btn-default" type="submit" id="search-btn">点我搜索</button>
+        </form>
+    </div>
+</nav>
+

@@ -1,0 +1,29 @@
+.result {
+    color: gray;
+}
+
+.brief-title {
+    margin-bottom: 0px;
+}
+
+.brief-comment {
+    color: gray;
+    padding-top: 1px;
+    padding-bottom: 2px;
+}
+
+.brief-list h3 {
+    font-size: 20px;
+}
+
+.highlight {
+    color: #c00;
+}
+
+.time-block {
+    padding: 10px;
+    padding-bottom: 0px;
+}
+body {
+    font: 12px/20px "Hiragino Sans GB","Microsoft Yahei","Î¢ÈíÑÅºÚ",SimSun,"ËÎÌå",Arial;
+}

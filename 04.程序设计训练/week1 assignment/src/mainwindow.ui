@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>789</width>
+    <height>598</height>
+   </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>DMFB模拟界面</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QWGraphicsView" name="View"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>789</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionIni"/>
+   <addaction name="actionopen"/>
+   <addaction name="actionNext"/>
+   <addaction name="actionBack"/>
+   <addaction name="actionPlay"/>
+   <addaction name="actionStop"/>
+   <addaction name="actionReset"/>
+   <addaction name="separator"/>
+   <addaction name="actionExpand"/>
+   <addaction name="actionShrink"/>
+   <addaction name="actionText"/>
+   <addaction name="actionRotateRight"/>
+   <addaction name="actionRotateLeft"/>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionIni">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../sudoku-qt5-master/sudoku-qt5-master/sudoku/control/png/power-button.png</normaloff>../../../sudoku-qt5-master/sudoku-qt5-master/sudoku/control/png/power-button.png</iconset>
+   </property>
+   <property name="text">
+    <string>Initialize</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionopen">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/plus.png</normaloff>:/control/png/plus.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionNext">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/next-1.png</normaloff>:/control/png/next-1.png</iconset>
+   </property>
+   <property name="text">
+    <string>Next</string>
+   </property>
+   <property name="shortcut">
+    <string>Right</string>
+   </property>
+  </action>
+  <action name="actionBack">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/previous.png</normaloff>:/control/png/previous.png</iconset>
+   </property>
+   <property name="text">
+    <string>Back</string>
+   </property>
+   <property name="shortcut">
+    <string>Left</string>
+   </property>
+  </action>
+  <action name="actionPlay">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/play.png</normaloff>:/control/png/play.png</iconset>
+   </property>
+   <property name="text">
+    <string>Play</string>
+   </property>
+   <property name="shortcut">
+    <string>Space</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/rewind.png</normaloff>:/control/png/rewind.png</iconset>
+   </property>
+   <property name="text">
+    <string>Reset</string>
+   </property>
+   <property name="shortcut">
+    <string>Space</string>
+   </property>
+  </action>
+  <action name="actionExpand">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/expand.png</normaloff>:/control/png/expand.png</iconset>
+   </property>
+   <property name="text">
+    <string>Expand</string>
+   </property>
+  </action>
+  <action name="actionShrink">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/minimize.png</normaloff>:/control/png/minimize.png</iconset>
+   </property>
+   <property name="text">
+    <string>Shrink</string>
+   </property>
+  </action>
+  <action name="actionStop">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/pause.png</normaloff>:/control/png/pause.png</iconset>
+   </property>
+   <property name="text">
+    <string>Stop</string>
+   </property>
+  </action>
+  <action name="actionRotateRight">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/RotateRight.png</normaloff>:/control/png/RotateRight.png</iconset>
+   </property>
+   <property name="text">
+    <string>RotateRight</string>
+   </property>
+  </action>
+  <action name="actionRotateLeft">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/RotateLeft.png</normaloff>:/control/png/RotateLeft.png</iconset>
+   </property>
+   <property name="text">
+    <string>RotateLeft</string>
+   </property>
+  </action>
+  <action name="actionText">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/control/png/text.png</normaloff>:/control/png/text.png</iconset>
+   </property>
+   <property name="text">
+    <string>addText</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QWGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>qwgraphicsview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="icon.qrc"/>
+ </resources>
+ <connections/>
+</ui>

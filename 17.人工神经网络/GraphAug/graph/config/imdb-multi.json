@@ -1,0 +1,6 @@
+{
+    "dataset": "IMDB-MULTI",
+    "layers": 4,
+    "batchsize": 128,
+    "epochs": 40
+}

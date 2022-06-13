@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass[UTF8,12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{xeCJK} %导入中文包
+\usepackage[linesnumbered, boxed, ruled, commentsnumbered, noend]{algorithm2e}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,
+}
+\linespread{1.5}
+\pagestyle{fancy}
+
+\newenvironment{problem}[2][Problem]
+{ \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2}}
+	{  \end{mdframed}}
+
+
+% Define solution environment
+\newenvironment{Proof}
+{\textit{Proof:}}
+{}
+\newenvironment{answer}
+{%\textit{Answer:}
+}
+{}
+\newenvironment{eq}
+{
+	\begin{equation}
+		\begin{aligned}\nonumber
+}
+{
+		\end{aligned}
+	\end{equation}
+}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{张鹤潇 2018011365}
+\rhead{多元统计分析} 
+\chead{\textbf{Homework 6}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+%\setlength{\parindent}{0pt}
+
+\begin{problem}{11.4}
+\end{problem}
+\begin{answer}
+    (1).
+\begin{eq}
+    R_1: \frac{f_1(x)}{f_2(x)}\ge 
+    \frac{c(1|2)p_2}{c(2|1)p_1} = 0.4\\
+    R_2: \frac{f_1(x)}{f_2(x)}<
+    \frac{c(1|2)p_2}{c(2|1)p_1} = 0.4
+\end{eq}(2).
+\begin{eq}
+        \frac{f_1(x)}{f_2(x)} = 0.6 \ge 0.4
+    \end{eq}故此新项属于$\pi_1$.
+\end{answer}
+
+\begin{problem}{11.14}
+\end{problem}
+\begin{answer}
+在例11.3中，$\hat{a}=(37.6, -28.9)^T, \hat{m} = \hat{a}\frac{1}{2}
+(\bar{y_1}+\bar{y_2})=-4.61$.\\
+根据(11-21),
+\begin{eq}
+    \hat{a}^* &= \frac{\hat{a}}{||\hat{a}||} = (0.79,-0.61)^T\\
+    \hat{m}^* &= \frac{\hat{m}}{||\hat{a}||} = -0.10
+\end{eq}因$x_0^T \hat{a}^* = -0.14 < \hat{m}^*$，将$x_0$分到$\pi_2$.
+
+根据(11-22),
+\begin{eq}
+    \hat{a}^* &= \frac{\hat{a}}{\hat{a}_1} = (1,-0.77)^T\\
+    \hat{m}^* &= \frac{\hat{m}}{\hat{a}_1} = -0.12
+\end{eq}因$ x_0^T \hat{a}^* = -0.18 < \hat{m}^*$，将$x_0$分到$\pi_2$.
+
+结果与例11.3中刻度变换之前的一致。应该是一致的，因为不等式两边均乘以相同的变换系数。
+\end{answer}
+\end{document}

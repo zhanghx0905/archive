@@ -1,0 +1,6 @@
+{
+    "dataset": "MUTAG",
+    "layers": 4,
+    "batchsize": 256,
+    "epochs": 20
+}

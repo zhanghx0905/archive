@@ -1,0 +1,60 @@
+---
+title: "hw5"
+author: "Zhang Hexiao"
+date: "2020/4/25"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 9.19
+
+Import Dataset T9-12.
+
+```{r}
+rm(list=ls())
+data <- read.table("T9-12.DAT")
+```
+
+## (1)
+
+```{r}
+library(psych)
+fit.pc <- principal(data, nfactors = 3, rotate = 'none')
+cat("L and phi extimated by the PC method are:\n")
+fit.pc$loadings
+fit.pc$uniquenesses
+
+cat("\nL and phi extimated by the MLE method are:\n")
+fit.mle <- factanal(data, factors = 3, rotation = 'none')
+fit.mle$loadings
+fit.mle$uniquenesses
+```
+
+## (2).
+
+```{r}
+fit.pc$loadings[, 1:2]
+```
+
+## (3).
+
+```{r}
+v.sqrt <- diag(sqrt(diag(var(data)))) # V^(1/2)
+(L.mle.raw <- v.sqrt %*% fit.mle$loadings) # L = V^(1/2) Lz
+(Phi.mle.raw <- v.sqrt %*% diag(fit.mle$uniquenesses) %*% v.sqrt) # Phi = V^(1/2) Phiz V^(1/2)
+```
+## (4).
+
+```{r}
+(fit.mle <- factanal(data, factors = 3, scores = "regression"))
+cat("The communalities is:\n")
+1 - fit.mle$uniquenesses
+```
+## (5).
+```{r}
+fit.mle$scores[1, ] # regression
+```
+
